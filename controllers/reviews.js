@@ -3,10 +3,10 @@ const asyncHandler = require('../middleware/async');
 const Review = require('../models/Review');
 const School = require('../models/School');
 
-// @desc      Get reviews
-// @route     GET /api/v1/reviews
-// @route     GET /api/v1/schools/:schoolId/reviews
-// @access    Public
+//      Get reviews
+//     GET /api/v1/reviews
+//   GET /api/v1/schools/:schoolId/reviews
+
 exports.getReviews = asyncHandler(async (req, res, next) => {
   if (req.params.schoolId) {
     const reviews = await Review.find({ school: req.params.schoolId });
@@ -21,9 +21,9 @@ exports.getReviews = asyncHandler(async (req, res, next) => {
   }
 });
 
-// @desc      Get single review
-// @route     GET /api/v1/reviews/:id
-// @access    Public
+//     Get single review
+//     GET /api/v1/reviews/:id
+
 exports.getReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id).populate({
     path: 'school',
@@ -42,9 +42,9 @@ exports.getReview = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Add review
-// @route     POST /api/v1/schools/:schoolId/reviews
-// @access    Private
+//    Add review
+//    POST /api/v1/schools/:schoolId/reviews
+
 exports.addReview = asyncHandler(async (req, res, next) => {
   req.body.school = req.params.schoolId;
   req.body.user = req.user.id;
@@ -68,9 +68,9 @@ exports.addReview = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Update review
-// @route     PUT /api/v1/reviews/:id
-// @access    Private
+//    Update review
+//      PUT /api/v1/reviews/:id
+
 exports.updateReview = asyncHandler(async (req, res, next) => {
   let review = await Review.findById(req.params.id);
 
@@ -96,9 +96,9 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Delete review
-// @route     DELETE /api/v1/reviews/:id
-// @access    Private
+//      Delete review
+//    DELETE /api/v1/reviews/:id
+
 exports.deleteReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id);
 

@@ -3,10 +3,10 @@ const asyncHandler = require('../middleware/async');
 const Course = require('../models/Course');
 const School = require('../models/School');
 
-// @desc      Get courses
-// @route     GET /api/v1/courses
-// @route     GET /api/v1/schools/:schoolId/courses
-// @access    Public
+//       Get courses
+//      GET /api/v1/courses
+//      GET /api/v1/schools/:schoolId/courses
+
 exports.getCourses = asyncHandler(async (req, res, next) => {
   if (req.params.schoolId) {
     const courses = await Course.find({ school: req.params.schoolId });
@@ -21,9 +21,9 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
   }
 });
 
-// @desc      Get single course
-// @route     GET /api/v1/courses/:id
-// @access    Public
+//     Get single course
+//     GET /api/v1/courses/:id
+
 exports.getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id).populate({
     path: 'school',
@@ -42,9 +42,9 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Add course
-// @route     POST /api/v1/schools/:schoolId/courses
-// @access    Private
+//      Add course
+//     POST /api/v1/schools/:schoolId/courses
+
 exports.addCourse = asyncHandler(async (req, res, next) => {
   req.body.school = req.params.schoolId;
   req.body.user = req.user.id;
@@ -78,9 +78,9 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Update course
-// @route     PUT /api/v1/courses/:id
-// @access    Private
+//    Update course
+//      PUT /api/v1/courses/:id
+
 exports.updateCourse = asyncHandler(async (req, res, next) => {
   let course = await Course.findById(req.params.id);
 
@@ -111,9 +111,9 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Delete course
-// @route     DELETE /api/v1/courses/:id
-// @access    Private
+//      Delete course
+//    DELETE /api/v1/courses/:id
+
 exports.deleteCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id);
 

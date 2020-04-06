@@ -3,16 +3,16 @@ const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 const School = require('../models/School');
 
-// @desc      Get all schools
-// @route     GET /api/v1/schools
-// @access    Public
+//      Get all schools
+//     GET /api/v1/schools
+
 exports.getSchools = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);
 });
 
-// @desc      Get single school
-// @route     GET /api/v1/schools/:id
-// @access    Public
+// Get single school
+//    GET /api/v1/schools/:id
+
 exports.getSchool = asyncHandler(async (req, res, next) => {
   const school = await School.findById(req.params.id);
 
@@ -25,9 +25,9 @@ exports.getSchool = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: school });
 });
 
-// @desc      Create new school
-// @route     POST /api/v1/schools
-// @access    Private
+//     Create new school
+//      POST /api/v1/schools
+
 exports.createSchool = asyncHandler(async (req, res, next) => {
   // Add user to req,body
   req.body.user = req.user.id;
@@ -53,9 +53,9 @@ exports.createSchool = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Update school
-// @route     PUT /api/v1/schools/:id
-// @access    Private
+//       Update school
+//     PUT /api/v1/schools/:id
+
 exports.updateSchool = asyncHandler(async (req, res, next) => {
   let school = await School.findById(req.params.id);
 
@@ -83,9 +83,9 @@ exports.updateSchool = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: school });
 });
 
-// @desc      Delete school
-// @route     DELETE /api/v1/schools/:id
-// @access    Private
+//     Delete school
+//     DELETE /api/v1/schools/:id
+
 exports.deleteSchool = asyncHandler(async (req, res, next) => {
   const school = await School.findById(req.params.id);
 
@@ -111,9 +111,9 @@ exports.deleteSchool = asyncHandler(async (req, res, next) => {
 });
 
 
-// @desc      Upload photo for school
-// @route     PUT /api/v1/schools/:id/photo
-// @access    Private
+//   Upload photo for school
+//   PUT /api/v1/schools/:id/photo
+
 exports.schoolPhotoUpload = asyncHandler(async (req, res, next) => {
   const school = await School.findById(req.params.id);
 

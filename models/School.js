@@ -52,12 +52,12 @@ const SchoolSchema = new mongoose.Schema(
       type: [String],
       required: true,
       enum: [
-        'Web Development',
-        'Mobile Development',
-        'UI/UX',
-        'Data Science',
-        'Business',
-        'Other'
+        'course A',
+        'Course B',
+        'course c',
+        'Course D',
+        'Course E',
+        'other'
       ]
     },
     averageRating: {
