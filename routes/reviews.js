@@ -11,12 +11,18 @@ const Review = require('../models/Review');
 
 const router = express.Router({ mergeParams: true });
 
-
+const AllResults = require('../middleware/AllResults');
 const { protect, authorize } = require('../middleware/auth');
 
 router
   .route('/')
-  .get(getReviews)
+  .get(
+    AllResults(Review, {
+      path: 'school',
+      select: 'name description'
+    }),
+    getReviews
+  )
   .post(protect, authorize('user', 'admin'), addReview);
 
 router

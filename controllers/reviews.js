@@ -4,8 +4,8 @@ const Review = require('../models/Review');
 const School = require('../models/School');
 
 //      Get reviews
-//     GET /api/v1/reviews
-//   GET /api/v1/schools/:schoolId/reviews
+//     GET /api/reviews
+//   GET /api/schools/:schoolId/reviews
 
 exports.getReviews = asyncHandler(async (req, res, next) => {
   if (req.params.schoolId) {
@@ -22,7 +22,7 @@ exports.getReviews = asyncHandler(async (req, res, next) => {
 });
 
 //     Get single review
-//     GET /api/v1/reviews/:id
+//     GET /api/reviews/:id
 
 exports.getReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id).populate({
@@ -43,7 +43,7 @@ exports.getReview = asyncHandler(async (req, res, next) => {
 });
 
 //    Add review
-//    POST /api/v1/schools/:schoolId/reviews
+//    POST /api/schools/:schoolId/reviews
 
 exports.addReview = asyncHandler(async (req, res, next) => {
   req.body.school = req.params.schoolId;
@@ -69,7 +69,7 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 });
 
 //    Update review
-//      PUT /api/v1/reviews/:id
+//      PUT /api/reviews/:id
 
 exports.updateReview = asyncHandler(async (req, res, next) => {
   let review = await Review.findById(req.params.id);
@@ -97,7 +97,7 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
 });
 
 //      Delete review
-//    DELETE /api/v1/reviews/:id
+//    DELETE /api/reviews/:id
 
 exports.deleteReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id);

@@ -4,8 +4,8 @@ const Course = require('../models/Course');
 const School = require('../models/School');
 
 //       Get courses
-//      GET /api/v1/courses
-//      GET /api/v1/schools/:schoolId/courses
+//      GET /api/courses
+//      GET /api/schools/:schoolId/courses
 
 exports.getCourses = asyncHandler(async (req, res, next) => {
   if (req.params.schoolId) {
@@ -22,7 +22,7 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
 });
 
 //     Get single course
-//     GET /api/v1/courses/:id
+//     GET /api/courses/:id
 
 exports.getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id).populate({
@@ -43,7 +43,7 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 });
 
 //      Add course
-//     POST /api/v1/schools/:schoolId/courses
+//     POST /api/schools/:schoolId/courses
 
 exports.addCourse = asyncHandler(async (req, res, next) => {
   req.body.school = req.params.schoolId;
@@ -79,7 +79,7 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
 });
 
 //    Update course
-//      PUT /api/v1/courses/:id
+//      PUT /api/courses/:id
 
 exports.updateCourse = asyncHandler(async (req, res, next) => {
   let course = await Course.findById(req.params.id);
@@ -112,7 +112,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
 });
 
 //      Delete course
-//    DELETE /api/v1/courses/:id
+//    DELETE /api/courses/:id
 
 exports.deleteCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id);

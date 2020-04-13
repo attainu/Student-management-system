@@ -38,11 +38,11 @@ app.use(fileupload());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount routers
-app.use('/api/v1/schools', schools);
-app.use('/api/v1/courses', courses);
-app.use('/api/v1/auth', auth);
-app.use('/api/v1/users', users);
-app.use('/api/v1/reviews', reviews);
+app.use('/api/schools', schools);
+app.use('/api/courses', courses);
+app.use('/api/auth', auth);
+app.use('/api/users', users);
+app.use('/api/reviews', reviews);
 
 app.use(errorHandler);
 

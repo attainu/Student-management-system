@@ -1,8 +1,8 @@
 [
   {
     "_id": "5d7a514b5d2c12c7449be042",
-    "name": "Admin Account",
-    "email": "admin@gmail.com",
+    "name": "biru",
+    "email": "biru@gmail.com",
     "role": "user",
     "password": "123456"
   },
@@ -71,8 +71,8 @@
   },
   {
     "_id": "5c8a1d5b0190b214360dc038",
-    "name": "Barry",
-    "email": "barry@gmail.com",
+    "name": "developer",
+    "email": "developer@gmail.com",
     "role": "user",
     "password": "123456"
   },

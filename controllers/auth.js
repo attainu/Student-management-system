@@ -22,7 +22,7 @@ exports.register = asyncHandler(async (req, res, next) => {
 });
 
 //      Login user
-//     POST /api/v1/auth/login
+//     POST /api/auth/login
 
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
@@ -50,7 +50,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 });
 
 //    Log user out / clear cookie
-//     GET /api/v1/auth/logout
+//     GET /api/auth/logout
 
 exports.logout = asyncHandler(async (req, res, next) => {
   res.cookie('token', 'none', {
@@ -65,7 +65,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
 });
 
 //    Get current logged in user
-//   POST /api/v1/auth/me
+//   POST /api/auth/me
 
 exports.getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
@@ -77,7 +77,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 });
 
 //      Update user details
-//   PUT /api/v1/auth/updatedetails
+//   PUT /api/auth/updatedetails
 
 exports.updateDetails = asyncHandler(async (req, res, next) => {
   const fieldsToUpdate = {
@@ -97,7 +97,7 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
 });
 
 //       Update password
-//    PUT /api/v1/auth/updatepassword
+//    PUT /api/auth/updatepassword
 
 exports.updatePassword = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
@@ -114,7 +114,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 });
 
 //     Forgot password
-//    POST /api/v1/auth/forgotpassword
+//    POST /api/auth/forgotpassword
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
@@ -131,7 +131,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   // Create reset url
   const resetUrl = `${req.protocol}://${req.get(
     'host'
-  )}/api/v1/auth/resetpassword/${resetToken}`;
+  )}/api/auth/resetpassword/${resetToken}`;
 
   const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
 

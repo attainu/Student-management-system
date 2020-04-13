@@ -1,17 +1,18 @@
 const path = require('path');
 const ErrorResponse = require('../utils/errorResponse');
+const geocoder = require('../utils/geocoder')
 const asyncHandler = require('../middleware/async');
 const School = require('../models/School');
 
 //      Get all schools
-//     GET /api/v1/schools
+//     GET /api/schools
 
 exports.getSchools = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);
 });
 
 // Get single school
-//    GET /api/v1/schools/:id
+//    GET /api/schools/:id
 
 exports.getSchool = asyncHandler(async (req, res, next) => {
   const school = await School.findById(req.params.id);
@@ -26,7 +27,7 @@ exports.getSchool = asyncHandler(async (req, res, next) => {
 });
 
 //     Create new school
-//      POST /api/v1/schools
+//      POST /api/schools
 
 exports.createSchool = asyncHandler(async (req, res, next) => {
   // Add user to req,body
@@ -54,7 +55,7 @@ exports.createSchool = asyncHandler(async (req, res, next) => {
 });
 
 //       Update school
-//     PUT /api/v1/schools/:id
+//     PUT /api/schools/:id
 
 exports.updateSchool = asyncHandler(async (req, res, next) => {
   let school = await School.findById(req.params.id);
@@ -84,7 +85,7 @@ exports.updateSchool = asyncHandler(async (req, res, next) => {
 });
 
 //     Delete school
-//     DELETE /api/v1/schools/:id
+//     DELETE /api/schools/:id
 
 exports.deleteSchool = asyncHandler(async (req, res, next) => {
   const school = await School.findById(req.params.id);
@@ -112,7 +113,7 @@ exports.deleteSchool = asyncHandler(async (req, res, next) => {
 
 
 //   Upload photo for school
-//   PUT /api/v1/schools/:id/photo
+//   PUT /api/schools/:id/photo
 
 exports.schoolPhotoUpload = asyncHandler(async (req, res, next) => {
   const school = await School.findById(req.params.id);

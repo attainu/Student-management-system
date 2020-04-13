@@ -11,12 +11,17 @@ const Course = require('../models/Course');
 
 const router = express.Router({ mergeParams: true });
 
-
+const AllResults = require('../middleware/AllResults');
 const { protect, authorize } = require('../middleware/auth');
 
 router
   .route('/')
-  .get(getCourses)
+  .get(AllResults(Course, {
+    path: 'school',
+    select: 'name description'
+  }),
+  getCourses
+)
   .post(protect, authorize('publisher', 'admin'), addCourse);
 
 router

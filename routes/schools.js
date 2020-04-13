@@ -5,6 +5,7 @@ const {
   createSchool,
   updateSchool,
   deleteSchool,
+  getSchoolsInRadius,
   schoolPhotoUpload
 } = require('../controllers/schools');
 
@@ -16,14 +17,14 @@ const reviewRouter = require('./reviews');
 
 const router = express.Router();
 
-
+const AllResults = require('../middleware/AllResults');
 const { protect, authorize } = require('../middleware/auth');
 
 // Re-route into other resource routers
 router.use('/:schoolId/courses', courseRouter);
 router.use('/:schoolId/reviews', reviewRouter);
 
-
+//router.route('/radius/:zipcode/:distance').get(getSchoolsInRadius);
 
 router
   .route('/:id/photo')
@@ -31,7 +32,7 @@ router
 
 router
   .route('/')
-  .get(getSchools)
+  .get(AllResults(School, 'courses'), getSchools)
   .post(protect, authorize('publisher', 'admin'), createSchool);
 
 router
