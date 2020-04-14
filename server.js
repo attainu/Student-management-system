@@ -3,6 +3,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
 const fileupload = require('express-fileupload');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
@@ -32,6 +34,12 @@ if (process.env.NODE_ENV === 'development') {
 
 // File uploading
 app.use(fileupload());
+
+// Set security headers
+app.use(helmet());
+
+//sanitize
+app.use(mongoSanitize());
 
 
 // Set static folder
