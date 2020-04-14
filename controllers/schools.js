@@ -111,6 +111,34 @@ exports.deleteSchool = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: {} });
 });
 
+  // Get schools within a radius
+  //  GET /api/schools/radius/:zipcode/:distance
+
+  exports.getSchoolsInRadius = asyncHandler(async (req, res, next) => {
+    const { zipcode, distance } = req.params;
+  
+    // Get lat/lng from geocoder
+    const loc = await geocoder.geocode(zipcode);
+    const lat = loc[0].latitude;
+    const lng = loc[0].longitude;
+  
+    // Calc radius using radians
+    // Divide dist by radius of Earth
+    // Earth Radius = 3,963 mi / 6,378 km
+    const radius = distance / 3963;
+  
+    const schools = await School.find({
+      location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    });
+  
+    res.status(200).json({
+      success: true,
+      count: schools.length,
+      data: schools
+    });
+  });
+  
+
 
 //   Upload photo for school
 //   PUT /api/schools/:id/photo

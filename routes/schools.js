@@ -24,7 +24,7 @@ const { protect, authorize } = require('../middleware/auth');
 router.use('/:schoolId/courses', courseRouter);
 router.use('/:schoolId/reviews', reviewRouter);
 
-//router.route('/radius/:zipcode/:distance').get(getSchoolsInRadius);
+router.route('/radius/:zipcode/:distance').get(getSchoolsInRadius);
 
 router
   .route('/:id/photo')
